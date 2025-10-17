@@ -10,4 +10,41 @@ body {
 .gradient-header{ 
         background: linear-gradient(135deg, #a68a64, #835845, #3c3f38);   
 }
-        
+
+.main-card{
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        border-radius: 15px;
+        overflow: hidden;
+}
+
+.btn-icon {
+        font-size: 1.2rem;
+}
+ 
+.pagination-controls {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+}
+
+.custom-pagination{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-top: 20px;
+        padding: 15px;
+        background: #f8f9fa;
+        border-radius: 8px;
+}
+.custom-pagination button{
+        min-width: 40px;        
+}
+
+.dataTables_length,
+.dataTables_filter,
+.dataTables_info,
+.dataTables_paginate {
+        display: none !important;
+}
