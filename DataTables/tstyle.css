@@ -1,0 +1,13 @@
+body {
+        background: linear-gradient(135deg, #313227 0%, #444B3C 30%, #835845 70%, #533024 100%);
+        min-height: 100vh;
+        padding: 20px 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #f0f0f0;
+        
+}
+
+.gradient-header{ 
+        background: linear-gradient(135deg, #a68a64, #835845, #3c3f38);   
+}
+        

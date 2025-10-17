@@ -14,8 +14,8 @@ body {
   box-shadow: 0 3px 12px rgba(0,0,0,0.1);
   color: #fff;
 }
-
-/* Table styles */
+   
+/* Table styles /*/
 
 .table > :not(caption) > * > * {
   padding: .5rem .5rem;
