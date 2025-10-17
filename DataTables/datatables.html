@@ -29,17 +29,32 @@
                 </div>                
 
                 <div class="table-responsive">
-                    <table id="authorsTable" class="table table-striped table-hover" style="width: 100%;">
+                    <table id="authorsTable" class="table table-striped table-hover text-center align-middle" style="width:100%">
                         <thead class="table-dark">
                             <tr>
                                 <th>ID</th>
                                 <th>Emri</th>
-                                <th>Mbiemri</th>
+                                <th>Veper e tyre</th>
+                                <th>Pershkrimi</th>
                                 <th>Veprime</th>
                             </tr>
                         </thead>
                         <tbody>
-                            
+                            <tr>
+                                <td>1</td>
+                                <td>Ismail Kadare</td>
+                                <td>Kronike ne Gur</td>
+                                <td>Shkrimtari më i njohur shqiptar në botë,
+            kandidat disa herë për Çmimin Nobel. Ka sjellë në letërsinë shqipe një stil të veçantë që ndërthur historinë, mitin dhe realitetin shqiptar.</td>
+                                <td>
+                                    <button class="btn btn-warning btn-sm me-1" onclick="editAuthor()">
+                                        <i class="bi bi-pencil-fill"></i> Edito
+                                    </button>
+                                    <button class="btn btn-danger btn-sm" onclick="deleteAuthor()">
+                                        <i class="bi bi-trash-fill"></i> Fshij
+                                    </button>
+                                </td>
+                            </tr>
                         </tbody>
 
                     </table>
