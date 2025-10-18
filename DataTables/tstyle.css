@@ -48,3 +48,22 @@ body {
 .dataTables_paginate {
         display: none !important;
 }
+
+#authorsTable td:nth-child(2) {
+    white-space: nowrap;       /* Keep text in one line */
+    overflow: hidden;          /* Hide overflow */
+    text-overflow: ellipsis;   /* Show "..." if text is too long */
+    max-width: 200px;          /* Adjust width as needed */
+}
+/* Add space between Edit and Delete buttons */
+#authorsTable .btn{
+    margin-right: 4px;
+    margin-left: 4px;
+    margin-bottom: 5px;  
+    margin-top: 5px;  /* Space below buttons for small screens */
+}
+
+.modal-header {
+    border-bottom: none;       /* Remove bottom border */
+}
+
