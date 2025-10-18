@@ -13,8 +13,13 @@ window.resetForm = resetForm;
 window.saveAuthor = saveAuthor;
 
 // Initialize DataTable
-document.addEventListener('DOMContentLoaded', function() {
+$(document).ready(function() {
     table = new DataTable('#authorsTable', {
+        paging: true,
+        lengthChange: false,
+        ordering: true,
+        info: true,
+        responsive: true,
         pageLength: 10,
         order: [[0, 'asc']],
         language: {
@@ -80,7 +85,7 @@ function setupPaginationControls() {
     function resetForm() {
         document.getElementById('authorForm').reset();
         document.getElementById('addAuthorModalLabel').innerHTML = '<i class="bi bi-person-plus-fill"></i> Shto Autor';
-        document.getElementById('submitBtn').innerHTML = '<class="bi bi-check-circle-fill"></i> Shto';
+        document.getElementById('submitBtn').innerHTML = '<i class="bi bi-check-circle-fill"></i> Shto';
         editingId = null;
     }
 
@@ -97,16 +102,17 @@ function setupPaginationControls() {
         const works = document.getElementById('authorWork').value;
         const description = document.getElementById('authorDescription').value;
 
-        if(editingId) {
+        if(editingId !== null) {
             // Update existing author
             let rowIndex = -1;
-            table.rows().every(function(index) {
-                const data = this.data();
-                if(data[0] == editingId) {
-                    rowIndex = index;
-                    return false;
+            const rowData = table.rows().data();
+
+            for(let i = 0; i < rowData.length; i++) {
+                if(rowData[i][0] == editingId) {
+                    rowIndex = i;
+                    break;
                 }
-            });
+            }
 
             if(rowIndex !== -1) {
                 table.row(rowIndex).data([
@@ -122,7 +128,7 @@ function setupPaginationControls() {
             // Add new author
             const newId = nextId;
             table.row.add([
-                newId++,
+                newId,
                 name,
                 works,
                 description,
@@ -140,23 +146,24 @@ function setupPaginationControls() {
         //edit existing author
     function editAuthor(id) {
         console.log('Editing author with ID:', id);
-        let rowIndex = -1;
-        let rowData = null;
+        const rowData = table.rows().data()
+        let foundData = null;
 
-        table.rows().every(function(index) {
-            const data = this.data();
-            if(data[0] == id) {
-                rowData = data;
-                rowIndex = index;
-                return false;
+        for(let i = 0; i < rowData.length; i++) {
+            if(rowData[i][0] == id) {
+                foundData = rowData[i];
+                break;
             }
-        });
+        }
 
-        if(rowData) {
+        console.log('Found row data:', foundData); //Debug
+
+
+        if(foundData) {
             editingId = id;
-            document.getElementById('authorName').value = rowData[1];
-            document.getElementById('authorWork').value = rowData[2];
-            document.getElementById('authorDescription').value = rowData[3];
+            document.getElementById('authorName').value = foundData[1];
+            document.getElementById('authorWork').value = foundData[2];
+            document.getElementById('authorDescription').value = foundData[3];
             document.getElementById('addAuthorModalLabel').innerHTML = '<i class="bi bi-pencil-fill"></i> Ndrysho Autor';
             document.getElementById('submitBtn').innerHTML = '<i class="bi bi-check-circle-fill"></i> Ruaj Ndryshimet';
 
@@ -178,20 +185,20 @@ function setupPaginationControls() {
     //delete author
     function deleteAuthor(id) {
         if(confirm('A jeni të sigurt që dëshironi të fshini këtë autor?')) {
+            const rowData = table.rows().data();
             let rowIndex = -1;
 
-            table.rows().every(function(index) {
-                const data = this.data();
-                if(data[0] == id) {
-                    rowIndex = index;
-                    return false;
+            for(let i = 0; i < rowData.length; i++) {
+                if(rowData[i][0] == id) {
+                    rowIndex = i;
+                    break;
                 }
-            });
+            }
+
             if(rowIndex !== -1) {
                 table.row(rowIndex).remove().draw();
                 updatePaginationInfo();
             }
         }
     }
-    
         
