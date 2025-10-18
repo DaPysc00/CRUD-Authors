@@ -1,8 +1,16 @@
 //Variables
 let table;
 let editingId = null;
-let nextId = 6; // Next ID for new authors
+let nextId = 2; // Next ID for new authors
 let modalInstance;
+
+//To make function accessible globally
+window.editAuthor = editAuthor;
+window.deleteAuthor = deleteAuthor;
+window.goToPrev = goToPrev;
+window.goToNext = goToNext;
+window.resetForm = resetForm;
+window.saveAuthor = saveAuthor;
 
 // Initialize DataTable
 document.addEventListener('DOMContentLoaded', function() {
@@ -21,7 +29,13 @@ document.addEventListener('DOMContentLoaded', function() {
         ]
     });
 
-    modalInstance = new bootstrap.Modal(document.getElementById('authorModal'));
+    console.log('DataTable initialized:', table);
+
+    // Initialize Bootstrap Modal
+    const modalElement = document.getElementById('addAuthorModal');
+    if (modalElement) {
+        modalInstance = new bootstrap.Modal(modalElement);
+    }
     setupPaginationControls();
     updatePaginationInfo();
     });
@@ -44,7 +58,7 @@ function setupPaginationControls() {
     function updatePaginationInfo() {
         const info = table.page.info();
         const currentPage = info.page + 1;
-        const totalPages = info.pages;
+        const totalPages = info.pages || 1;
 
         document.getElementById('pageInfo').textContent = `Faqja ${currentPage} nga ${totalPages}`;
         document.getElementById('infoDisplay').textContent = `Duke treguar ${info.start + 1} nga ${info.end} te ${info.recordsTotal} Autoreve`;
@@ -66,12 +80,12 @@ function setupPaginationControls() {
     function resetForm() {
         document.getElementById('authorForm').reset();
         document.getElementById('addAuthorModalLabel').innerHTML = '<i class="bi bi-person-plus-fill"></i> Shto Autor';
-        document.getElementById('submitBtn').innerHTML = '< class="bi bi-check-circle-fill"></i> Shto';
+        document.getElementById('submitBtn').innerHTML = '<class="bi bi-check-circle-fill"></i> Shto';
         editingId = null;
     }
 
     //Submit form for adding/editing author
-    function submitForm(event) {
+    function saveAuthor() {
         const form = document.getElementById('authorForm');
 
         if(!form.checkValidity()) {
@@ -80,7 +94,7 @@ function setupPaginationControls() {
         }
 
         const name = document.getElementById('authorName').value;
-        const works = document.getElementById('authorWorks').value;
+        const works = document.getElementById('authorWork').value;
         const description = document.getElementById('authorDescription').value;
 
         if(editingId) {
@@ -90,7 +104,7 @@ function setupPaginationControls() {
                 const data = this.data();
                 if(data[0] == editingId) {
                     rowIndex = index;
-                    false;
+                    return false;
                 }
             });
 
@@ -106,8 +120,9 @@ function setupPaginationControls() {
             }
         } else {
             // Add new author
+            const newId = nextId;
             table.row.add([
-                nextId++,
+                newId++,
                 name,
                 works,
                 description,
@@ -120,11 +135,13 @@ function setupPaginationControls() {
 
         modalInstance.hide();
         form.reset();
+        editingId = null;
     }
         //edit existing author
     function editAuthor(id) {
-        let rowData = null;
+        console.log('Editing author with ID:', id);
         let rowIndex = -1;
+        let rowData = null;
 
         table.rows().every(function(index) {
             const data = this.data();
@@ -136,13 +153,25 @@ function setupPaginationControls() {
         });
 
         if(rowData) {
+            editingId = id;
             document.getElementById('authorName').value = rowData[1];
-            document.getElementById('authorWorks').value = rowData[2];
+            document.getElementById('authorWork').value = rowData[2];
             document.getElementById('authorDescription').value = rowData[3];
             document.getElementById('addAuthorModalLabel').innerHTML = '<i class="bi bi-pencil-fill"></i> Ndrysho Autor';
             document.getElementById('submitBtn').innerHTML = '<i class="bi bi-check-circle-fill"></i> Ruaj Ndryshimet';
 
-            modalInstance.show();
+            //Try alternative opening modal method
+            const modalElement = document.getElementById('addAuthorModal');
+            if(modalInstance){
+                modalInstance.show();
+            }else{
+                modalInstance = new bootstrap.Modal(modalElement);
+                modalInstance.show();
+            }
+            console.log('Modal should be shown now'); //Debug
+        }else{
+            console.error('Author with ID ' + id + ' not found.'); //Debug
+            
         }
     }
 
@@ -160,6 +189,7 @@ function setupPaginationControls() {
             });
             if(rowIndex !== -1) {
                 table.row(rowIndex).remove().draw();
+                updatePaginationInfo();
             }
         }
     }
