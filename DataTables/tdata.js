@@ -1,7 +1,6 @@
 //Variables
 let table;
 let editingId = null;
-let nextId = 2; // Next ID for new authors
 let modalInstance;
 
 //To make function accessible globally
