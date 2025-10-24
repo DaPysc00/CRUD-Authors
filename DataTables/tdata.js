@@ -1,9 +1,9 @@
-//Variables
+// Global variables
 let table;
 let editingId = null;
 let modalInstance;
 
-//To make function accessible globally
+// Expose functions globally
 window.editAuthor = editAuthor;
 window.deleteAuthor = deleteAuthor;
 window.goToPrev = goToPrev;
@@ -11,9 +11,41 @@ window.goToNext = goToNext;
 window.resetForm = resetForm;
 window.saveAuthor = saveAuthor;
 
-// Initialize DataTable
-$(document).ready(function() {
-    table = new DataTable('#authorsTable', {
+// Helper to create action buttons HTML
+function actionButtonsHTML(id) {
+    return `
+        <button class="btn btn-warning btn-sm me-1" onclick="editAuthor(${id})">
+            <i class="bi bi-pencil-fill"></i> Edito
+        </button>
+        <button class="btn btn-danger btn-sm" onclick="deleteAuthor(${id})">
+            <i class="bi bi-trash-fill"></i> Fshij
+        </button>
+    `;
+}
+
+// Initialize DataTable properly
+$(document).ready(function () {
+    // Extract any existing HTML rows to feed DataTables
+    const initialData = [];
+    $('#authorsTable tbody tr').each(function () {
+        const cells = $(this).find('td');
+        const id = parseInt($(cells[0]).text().trim());
+        const name = $(cells[1]).text().trim();
+        const works = $(cells[2]).text().trim();
+        const description = $(cells[3]).text().trim();
+        initialData.push([id, name, works, description, actionButtonsHTML(id)]);
+    });
+
+    // Initialize DataTable using data array (so IDs stay synced)
+    table = $('#authorsTable').DataTable({
+        data: initialData,
+        columns: [
+            { title: 'ID' },
+            { title: 'Emri' },
+            { title: 'Vepra' },
+            { title: 'Përshkrimi' },
+            { title: 'Veprime' },
+        ],
         paging: true,
         lengthChange: false,
         ordering: true,
@@ -28,176 +60,163 @@ $(document).ready(function() {
             infoEmpty: '',
             emptyTable: 'Nuk ka të dhëna të disponueshme në tabelë',
         },
-        columnDefs: [
-            { orderable: false, targets: 4 } // Disable ordering on Actions column
-        ]
+        columnDefs: [{ orderable: false, targets: 4 }],
     });
 
-    console.log('DataTable initialized:', table);
-
-    // Initialize Bootstrap Modal
+    // Bootstrap Modal setup
     const modalElement = document.getElementById('addAuthorModal');
     if (modalElement) {
         modalInstance = new bootstrap.Modal(modalElement);
     }
+
     setupPaginationControls();
     updatePaginationInfo();
-    });
+});
 
-    // Setup Pagination Controls
+// Pagination Controls
 function setupPaginationControls() {
-    document.getElementById('entriesSelect').addEventListener('change', function() {
+    document.getElementById('entriesSelect').addEventListener('change', function () {
         table.page.len(parseInt(this.value)).draw();
         updatePaginationInfo();
     });
-    document.getElementById('searchInput').addEventListener('keyup', function() {
+
+    document.getElementById('searchInput').addEventListener('keyup', function () {
         table.search(this.value).draw();
         updatePaginationInfo();
     });
-    table.on('draw', function() {
+
+    table.on('draw', function () {
         updatePaginationInfo();
     });
 }
-    // Update Pagination Info
-    function updatePaginationInfo() {
-        const info = table.page.info();
-        const currentPage = info.page + 1;
-        const totalPages = info.pages || 1;
 
-        document.getElementById('pageInfo').textContent = `Faqja ${currentPage} nga ${totalPages}`;
-        document.getElementById('infoDisplay').textContent = `Duke treguar ${info.start + 1} nga ${info.end} te ${info.recordsTotal} Autoreve`;
+// Update pagination info
+function updatePaginationInfo() {
+    const info = table.page.info();
+    const currentPage = info.page + 1;
+    const totalPages = info.pages || 1;
 
-        document.getElementById('prevBtn').disabled = currentPage === 1;
-        document.getElementById('nextBtn').disabled = currentPage === totalPages;
+    document.getElementById('pageInfo').textContent = `Faqja ${currentPage} nga ${totalPages}`;
+    document.getElementById('infoDisplay').textContent = `Duke treguar ${info.start + 1} deri në ${info.end} nga ${info.recordsTotal} autorë`;
 
+    document.getElementById('prevBtn').disabled = currentPage === 1;
+    document.getElementById('nextBtn').disabled = currentPage === totalPages;
+}
+
+function goToPrev() {
+    table.page('previous').draw('page');
+}
+function goToNext() {
+    table.page('next').draw('page');
+}
+
+// Reset form
+function resetForm() {
+    document.getElementById('authorForm').reset();
+    document.getElementById('addAuthorModalLabel').innerHTML = '<i class="bi bi-person-plus-fill"></i> Shto Autor';
+    document.getElementById('submitBtn').innerHTML = '<i class="bi bi-check-circle-fill"></i> Shto';
+    editingId = null;
+}
+
+// Find next available numeric ID
+function getNextAvailableId() {
+    const ids = table
+        .rows()
+        .data()
+        .toArray()
+        .map((row) => parseInt(row[0]));
+    let nextId = 1;
+    while (ids.includes(nextId)) {
+        nextId++;
     }
-    // Go to Previous Page
-    function goToPrev() {
-        table.page('previous').draw('page');
-    }
-    // Go to Next Page
-    function goToNext() {
-        table.page('next').draw('page');
-    }
+    return nextId;
+}
 
-    //Reset form for adding new author
-    function resetForm() {
-        document.getElementById('authorForm').reset();
-        document.getElementById('addAuthorModalLabel').innerHTML = '<i class="bi bi-person-plus-fill"></i> Shto Autor';
-        document.getElementById('submitBtn').innerHTML = '<i class="bi bi-check-circle-fill"></i> Shto';
-        editingId = null;
+// Save Author (add or edit)
+function saveAuthor() {
+    const form = document.getElementById('authorForm');
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
     }
 
-    //Submit form for adding/editing author
-    function saveAuthor() {
-        const form = document.getElementById('authorForm');
+    const name = document.getElementById('authorName').value;
+    const works = document.getElementById('authorWork').value;
+    const description = document.getElementById('authorDescription').value;
 
-        if(!form.checkValidity()) {
-            form.reportValidity();
-            return;
-        }
+    if (editingId !== null) {
+        // Update existing
+        const rowIndex = table
+            .rows()
+            .indexes()
+            .toArray()
+            .find((i) => table.row(i).data()[0] == editingId);
 
-        const name = document.getElementById('authorName').value;
-        const works = document.getElementById('authorWork').value;
-        const description = document.getElementById('authorDescription').value;
-
-        if(editingId !== null) {
-            // Update existing author
-            let rowIndex = -1;
-            const rowData = table.rows().data();
-
-            for(let i = 0; i < rowData.length; i++) {
-                if(rowData[i][0] == editingId) {
-                    rowIndex = i;
-                    break;
-                }
-            }
-
-            if(rowIndex !== -1) {
-                table.row(rowIndex).data([
-                    editingId,
-                    name,
-                    works,
-                    description,
-                    '<button class="btn btn-sm btn-warning me-1" onclick="editAuthor(' + editingId + ')"><i class="bi bi-pencil-fill"></i> Edit</button>' +
-                    '<button class="btn btn-sm btn-danger" onclick="deleteAuthor(' + editingId + ')"><i class="bi bi-trash-fill"></i> Delete</button>'
-                ]).draw();
-            }
-        } else {
-            // Add new author
-            const newId = nextId;
-            table.row.add([
-                newId,
+        if (rowIndex !== undefined) {
+            table.row(rowIndex).data([
+                editingId,
                 name,
                 works,
                 description,
-                '<button class="btn btn-sm btn-warning me-1" onclick="editAuthor(' + (nextId) + ')"><i class="bi bi-pencil-fill"></i> Edit</button>' +
-                '<button class="btn btn-sm btn-danger" onclick="deleteAuthor(' + (nextId) + ')"><i class="bi bi-trash-fill"></i> Delete</button>'
-            ]).draw();
-
-            nextId++;
+                actionButtonsHTML(editingId),
+            ]).draw(false);
         }
-
-        modalInstance.hide();
-        form.reset();
-        editingId = null;
-    }
-        //edit existing author
-    function editAuthor(id) {
-        console.log('Editing author with ID:', id);
-        const rowData = table.rows().data()
-        let foundData = null;
-
-        for(let i = 0; i < rowData.length; i++) {
-            if(rowData[i][0] == id) {
-                foundData = rowData[i];
-                break;
-            }
-        }
-
-        console.log('Found row data:', foundData); //Debug
-
-
-        if(foundData) {
-            editingId = id;
-            document.getElementById('authorName').value = foundData[1];
-            document.getElementById('authorWork').value = foundData[2];
-            document.getElementById('authorDescription').value = foundData[3];
-            document.getElementById('addAuthorModalLabel').innerHTML = '<i class="bi bi-pencil-fill"></i> Ndrysho Autor';
-            document.getElementById('submitBtn').innerHTML = '<i class="bi bi-check-circle-fill"></i> Ruaj Ndryshimet';
-
-            //Try alternative opening modal method
-            const modalElement = document.getElementById('addAuthorModal');
-            if(modalInstance){
-                modalInstance.show();
-            }else{
-                modalInstance = new bootstrap.Modal(modalElement);
-                modalInstance.show();
-            }
-            console.log('Modal should be shown now'); //Debug
-        }else{
-            console.error('Author with ID ' + id + ' not found.'); //Debug
-            
-        }
+    } else {
+        // Add new
+        const newId = getNextAvailableId();
+        table.row.add([
+            newId,
+            name,
+            works,
+            description,
+            actionButtonsHTML(newId),
+        ]).draw(false);
     }
 
-    //delete author
-    function deleteAuthor(id) {
-        if(confirm('A jeni të sigurt që dëshironi të fshini këtë autor?')) {
-            const rowData = table.rows().data();
-            let rowIndex = -1;
+    modalInstance.hide();
+    form.reset();
+    editingId = null;
+    updatePaginationInfo();
+}
 
-            for(let i = 0; i < rowData.length; i++) {
-                if(rowData[i][0] == id) {
-                    rowIndex = i;
-                    break;
-                }
-            }
+// Edit author
+function editAuthor(id) {
+    const rowIndex = table
+        .rows()
+        .indexes()
+        .toArray()
+        .find((i) => table.row(i).data()[0] == id);
 
-            if(rowIndex !== -1) {
-                table.row(rowIndex).remove().draw();
-                updatePaginationInfo();
-            }
+    if (rowIndex === undefined) {
+        console.error(`Author with ID ${id} not found`);
+        return;
+    }
+
+    const rowData = table.row(rowIndex).data();
+    editingId = id;
+
+    document.getElementById('authorName').value = rowData[1];
+    document.getElementById('authorWork').value = rowData[2];
+    document.getElementById('authorDescription').value = rowData[3];
+    document.getElementById('addAuthorModalLabel').innerHTML = '<i class="bi bi-pencil-fill"></i> Ndrysho Autor';
+    document.getElementById('submitBtn').innerHTML = '<i class="bi bi-check-circle-fill"></i> Ruaj Ndryshimet';
+    modalInstance.show();
+}
+
+// Delete author
+function deleteAuthor(id) {
+    if (confirm('A jeni të sigurt që dëshironi të fshini këtë autor?')) {
+        const rowIndex = table
+            .rows()
+            .indexes()
+            .toArray()
+            .find((i) => table.row(i).data()[0] == id);
+
+        if (rowIndex !== undefined) {
+            table.row(rowIndex).remove().draw(false);
+            updatePaginationInfo();
+        } else {
+            console.error(`Autori me ID ${id} nuk u gjet`);
         }
     }
-        
+}

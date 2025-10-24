@@ -1,5 +1,5 @@
 body {
-        background: linear-gradient(135deg, #313227 0%, #444B3C 30%, #835845 70%, #533024 100%);
+        background: #FFF8DC;
         min-height: 100vh;
         padding: 20px 0;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -47,6 +47,13 @@ body {
 .dataTables_info,
 .dataTables_paginate {
         display: none !important;
+}
+
+#authorsTable thead {
+    background: #414548;       
+    color: #ffffff;            
+    display: table-header-group !important; 
+    visibility: visible !important; 
 }
 
 #authorsTable td:nth-child(2) {
