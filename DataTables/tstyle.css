@@ -20,6 +20,14 @@ body {
 .btn-icon {
         font-size: 1.2rem;
 }
+
+.btn-success{
+        --bs-btn-bg: #835845;
+        --bs-btn-border-color: #835845;
+        --bs-btn-hover-bg: #a68a64;
+        --bs-btn-hover-border-color: #a68a64;
+
+}
  
 .pagination-controls {
         background: #f8f9fa;
@@ -50,7 +58,7 @@ body {
 }
 
 #authorsTable thead {
-    background: #414548;       
+    background: #9e8155;       
     color: #ffffff;            
     display: table-header-group !important; 
     visibility: visible !important; 
@@ -68,6 +76,14 @@ body {
     margin-left: 4px;
     margin-bottom: 5px;  
     margin-top: 5px;  /* Space below buttons for small screens */
+}
+
+.btn-warning{
+        --bs-btn-bg: #f79f57;
+        --bs-btn-border-color: #f79f57;
+        --bs-btn-hover-bg: #e6732a;
+        --bs-btn-hover-border-color: #e6732a;
+
 }
 
 .modal-header {
