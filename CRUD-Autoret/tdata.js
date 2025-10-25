@@ -32,8 +32,9 @@ $(document).ready(function () {
         const id = parseInt($(cells[0]).text().trim());
         const name = $(cells[1]).text().trim();
         const works = $(cells[2]).text().trim();
-        const description = $(cells[3]).text().trim();
-        initialData.push([id, name, works, description, actionButtonsHTML(id)]);
+        const books = $(cells[3]).text().trim();
+        const description = $(cells[4]).text().trim();
+        initialData.push([id, name, works, books, description, actionButtonsHTML(id)]);
     });
 
     // Initialize DataTable using data array (so IDs stay synced)
@@ -43,6 +44,7 @@ $(document).ready(function () {
             { title: 'ID' },
             { title: 'Emri' },
             { title: 'Vepra' },
+            { title: 'Librat' },
             { title: 'Përshkrimi' },
             { title: 'Veprime' },
         ],
@@ -60,7 +62,7 @@ $(document).ready(function () {
             infoEmpty: '',
             emptyTable: 'Nuk ka të dhëna të disponueshme në tabelë',
         },
-        columnDefs: [{ orderable: false, targets: 4 }],
+        columnDefs: [{ orderable: false, targets: 5 }],
     });
 
     // Bootstrap Modal setup
@@ -153,10 +155,12 @@ function saveAuthor() {
             .find((i) => table.row(i).data()[0] == editingId);
 
         if (rowIndex !== undefined) {
+            const currentBooks = table.row(rowIndex).data()[3]; // Keep existing number of books
             table.row(rowIndex).data([
                 editingId,
                 name,
                 works,
+                currentBooks,
                 description,
                 actionButtonsHTML(editingId),
             ]).draw(false);
@@ -164,10 +168,12 @@ function saveAuthor() {
     } else {
         // Add new
         const newId = getNextAvailableId();
+        const randomBooks = Math.floor(Math.random() * 10) + 1; // Random number of books between 1 and 10
         table.row.add([
             newId,
             name,
             works,
+            randomBooks,
             description,
             actionButtonsHTML(newId),
         ]).draw(false);

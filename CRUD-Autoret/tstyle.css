@@ -1,5 +1,5 @@
 body {
-        background: #b2e0e4;
+        background: #ffffff;
         min-height: 100vh;
         padding: 20px 0;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -83,6 +83,12 @@ body {
     text-overflow: ellipsis;   /* Shows "..." for overflow */
     max-width: 150px;          /* Sets maximum width */
     vertical-align: middle;    /* Vertically centers */
+}
+
+#authorsTable th:nth-child(4),
+#authorsTable td:nth-child(4) {
+    text-align: left;
+    max-width: 100px;
 }
 
 /* Add space between Edit and Delete buttons */
