@@ -14,11 +14,11 @@ window.saveAuthor = saveAuthor;
 // Helper to create action buttons HTML
 function actionButtonsHTML(id) {
     return `
-        <button class="btn btn-warning btn-sm me-1" onclick="editAuthor(${id})">
-            <i class="bi bi-pencil-fill"></i> Edito
+        <button class="btn btn-warning btn-sm me-1" title="Nrysho" onclick="editAuthor(${id})">
+            <i class="bi bi-pencil-fill"></i>
         </button>
-        <button class="btn btn-danger btn-sm" onclick="deleteAuthor(${id})">
-            <i class="bi bi-trash-fill"></i> Fshij
+        <button class="btn btn-danger btn-sm" title="Fshi" onclick="deleteAuthor(${id})">
+            <i class="bi bi-trash-fill"></i>
         </button>
     `;
 }
