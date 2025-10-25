@@ -146,3 +146,59 @@ body {
     border-bottom: none;       /* Remove bottom border */
 }
 
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Push pagination to bottom */
+    min-height: 100%;               /* Ensure full vertical stretch */
+    position: relative;
+}
+
+
+.custom-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin-top: 15px;
+    padding: 10px 15px;
+    width: auto;
+}
+
+.custom-pagination button {
+    min-width: 32px;
+    height: 32px;
+    padding: 0;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+
+.custom-pagination .btn-primary i {
+    font-size: 1rem;
+}
+
+.custom-pagination .btn-outline-primary:hover {
+    background-color: #2e7a83;
+    color: white !important;
+}
+
+.custom-pagination-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin-top: auto;
+    margin-top: 15px;
+    margin-right: 10px;
+    bottom: 15px;
+        right: 15px;
+}
+
+#infoDisplay{
+        font-size: 0.8rem;
+        margin-top: 3px;
+        text-align: center;
+        width: 100%;
+        margin-right: 37px;
+}
+

@@ -73,10 +73,10 @@
                                 <td>5</td>
                                 <td>Poezi e njohur shqiptare.</td>
                                 <td>
-                                    <button class="btn btn-warning btn-sm me-1" onclick="editAuthor(1)">
+                                    <button class="btn btn-warning btn-sm me-1" onclick="editAuthor()">
                                         <i class="bi bi-pencil-fill"></i>
                                     </button>
-                                    <button class="btn btn-danger btn-sm" onclick="deleteAuthor(1)">
+                                    <button class="btn btn-danger btn-sm" onclick="deleteAuthor()">
                                         <i class="bi bi-trash-fill"></i>
                                     </button>
                                 </td>
@@ -88,10 +88,10 @@
                                 <td>3</td>
                                 <td>Poezi klasike e letërsisë shqiptare.</td>
                                 <td>
-                                    <button class="btn btn-warning btn-sm me-1"  onclick="editAuthor(1)">
+                                    <button class="btn btn-warning btn-sm me-1"  onclick="editAuthor()">
                                         <i class="bi bi-pencil-fill"></i>
                                     </button>
-                                    <button class="btn btn-danger btn-sm"  onclick="deleteAuthor(1)">
+                                    <button class="btn btn-danger btn-sm"  onclick="deleteAuthor()">
                                         <i class="bi bi-trash-fill"></i>
                                     </button>
                                 </td>
@@ -102,10 +102,11 @@
                                 <td>Kronike ne Gur</td>
                                 <td>7</td>
                                 <td>Një poemë kombëtare shqiptare.</td>
-                                    <button class="btn btn-warning btn-sm me-1"  onclick="editAuthor(1)">
+                                <td>
+                                    <button class="btn btn-warning btn-sm me-1"  onclick="editAuthor()">
                                         <i class="bi bi-pencil-fill"></i>
                                     </button>
-                                    <button class="btn btn-danger btn-sm" onclick="deleteAuthor(1)">
+                                    <button class="btn btn-danger btn-sm" onclick="deleteAuthor()">
                                         <i class="bi bi-trash-fill"></i>
                                     </button>
                                 </td>
@@ -114,16 +115,18 @@
                     </table>
                 </div>
 
+            <div class="custom-pagination-wrapper">
                 <div class="custom-pagination">
                     <button class="btn btn-primary btn-sm" id="prevBtn" onclick="goToPrev()">
-                        <i class="bi bi-chevron-left"></i> Para
+                        <i class="bi bi-chevron-left"></i>
                     </button>
+                    <span id="pageNumbers" class="mx-2"></span>
                     <span id="pageInfo" class="mx-2">Faqja 1 nga 1</span>
                     <button class="btn btn-primary btn-sm" id="nextBtn" onclick="goToNext()">
-                        Pas <i class="bi bi-chevron-right"></i>
+                        <i class="bi bi-chevron-right"></i>
                     </button>
                 </div>
-                <div class=" text-center mt-2">
+                <div class="text-center mt-1">
                     <span class="text-muted" id="infoDisplay">Duke treguar 1 nga 5 te 5 Autoreve</span>
                 </div>
             </div>

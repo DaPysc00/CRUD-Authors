@@ -89,7 +89,46 @@ function setupPaginationControls() {
 
     table.on('draw', function () {
         updatePaginationInfo();
+        renderPageNumbers();
     });
+}
+
+function renderPageNumbers() {
+    const info = table.page.info();
+    const totalPages = info.pages;
+    const currentPage = info.page + 1;
+
+    const container = document.getElementById("pageNumbers");
+    container.innerHTML = "";
+
+    // Determine which pages to show (max 3)
+    const maxVisible = 3;
+    let startPage = Math.max(1, currentPage - 1);
+    let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+
+    // Adjust start if near the end
+    if (endPage - startPage + 1 < maxVisible) {
+        startPage = Math.max(1, endPage - maxVisible + 1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+        const btn = document.createElement("button");
+        btn.className = "btn btn-outline-primary btn-sm mx-1";
+        btn.textContent = i;
+
+        if (i === currentPage) {
+            btn.classList.remove("btn-outline-primary");
+            btn.classList.add("btn-primary");
+        }
+
+        btn.addEventListener("click", function () {
+            table.page(i - 1).draw("page");
+            updatePaginationInfo();
+            renderPageNumbers();
+        });
+
+        container.appendChild(btn);
+    }
 }
 
 // Update pagination info
@@ -103,6 +142,8 @@ function updatePaginationInfo() {
 
     document.getElementById('prevBtn').disabled = currentPage === 1;
     document.getElementById('nextBtn').disabled = currentPage === totalPages;
+
+    renderPageNumbers();
 }
 
 function goToPrev() {
@@ -203,7 +244,7 @@ function editAuthor(id) {
 
     document.getElementById('authorName').value = rowData[1];
     document.getElementById('authorWork').value = rowData[2];
-    document.getElementById('authorDescription').value = rowData[3];
+    document.getElementById('authorDescription').value = rowData[4];
     document.getElementById('addAuthorModalLabel').innerHTML = '<i class="bi bi-pencil-fill"></i> Ndrysho Autor';
     document.getElementById('submitBtn').innerHTML = '<i class="bi bi-check-circle-fill"></i> Ruaj Ndryshimet';
     modalInstance.show();
