@@ -21,33 +21,36 @@
             </div>
             
             <div class="card-body">
+                  
                 
-                <div class="mb-3">
-                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addAuthorModal" onclick="resetForm()">
-                        <i class="bi bi-person-plus-fill"></i> Shto Autor
-                    </button>
-                </div>    
-                
-                <div class="pagination-controls">
-                    <div class="row align-items-center">
-                        <div class="col-md-6 mb-2 mb-md-0">
-                            <div class="d-flex align-items-center">
-                                <label class="mb-2 mb-0"> Shfaq</label>
-                                <select id="entriesSelect" class="form-select form-select-sm" style="width: auto;">
-                                    <option value="5">5</option>
-                                    <option value="10" selected>10</option>
-                                    <option value="15">15</option>
-                                    <option value="25">25</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="d-flex align-items-center justify-content-md-end">
-                                <label class="me-2 mb-0">
-                                    <i class="bi bi-search"></i>
-                                </label>
-                                <input type="text" id="searchInput" class="form-control form-control-sm" style="width: 250px;" placeholder="Kerko Autor...">
+                <div class="control-card card shadow-sm mb-3">
+                    <div class="card-body py-2">
+                        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
 
+                            <div class="flex-grow-1">
+                                <div class="input-group">
+                                    <span class="input-group-text bg-white border-end-0">
+                                        <i class="bi bi-search text-muted"></i>
+                                    </span>
+                                    <input type="text" id="searchInput" class="form-control border-start-0" placeholder="Kerko Autor..." onkeyup="searchAuthors()">
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center gap-2 flex-shrink-0">
+                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addAuthorModal" onclick="resetForm()">
+                                    <i class="bi bi-person-plus-fill"></i> Shto Autor
+                                </button>
+
+                                <div class="d-flex align-items-center">
+                                    <label for="entriesSelect" class="me-2 mb-0 fw-semibold">Shfaq</label>
+                                    <select id="entriesSelect" class="form-select form-select-sm" style="width: auto;">
+                                        <option value="5">5</option>
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
