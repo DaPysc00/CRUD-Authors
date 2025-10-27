@@ -22,31 +22,47 @@
             
             <div class="card-body">  
                 <div class="control-card card shadow-sm mb-3">
-                    <div class="card-body py-2">
-                        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
-                            <div class="flex-grow-1">
+                    <div class="card-body">
+                        <div class="row g-3 align-items-center">
+                            <!-- Search Bar -->
+                            <div class="col-12 col-lg-6">
                                 <div class="input-group">
                                     <span class="input-group-text bg-white border-end-0">
                                         <i class="bi bi-search text-muted"></i>
                                     </span>
-                                    <input type="text" id="searchInput" class="form-control border-start-0" placeholder="Kerko Autor..." onkeyup="searchAuthors()">
+                                    <input type="text" id="searchInput" class="form-control border-start-0" placeholder="Kerko Autor...">
                                 </div>
                             </div>
 
-                            <div class="d-flex align-items-center gap-2 flex-shrink-0">
-                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addAuthorModal" onclick="resetForm()">
-                                    <i class="bi bi-person-plus-fill"></i> Shto Autor
-                                </button>
+                            <!-- Buttons and Select -->
+                            <div class="col-12 col-lg-6">
+                                <div class="d-flex flex-wrap align-items-center justify-content-lg-end gap-3">
+                                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addAuthorModal" onclick="resetForm()">
+                                        <i class="bi bi-person-plus-fill"></i> Shto Autor
+                                    </button>
 
-                                <div class="d-flex align-items-center">
-                                    <label for="entriesSelect" class="me-2 mb-0 fw-semibold">Shfaq</label>
-                                    <select id="entriesSelect" class="form-select form-select-sm" style="width: auto;">
-                                        <option value="5">5</option>
-                                        <option value="10">10</option>
-                                        <option value="25">25</option>
-                                        <option value="50">50</option>
-                                        <option value="100">100</option>
-                                    </select>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <label for="entriesSelect" class="mb-0 fw-semibold text-nowrap">Shfaq:</label>
+                                        <select id="entriesSelect" class="form-select form-select-sm styled-select" style="width: auto; min-width: 70px;">
+                                            <option value="5" selected>5</option>
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="d-flex align-items-center gap-2">
+                                        <label for="sortSelect" class="mb-0 fw-semibold text-nowrap">Rendit:</label>
+                                        <select id="sortSelect" class="form-select form-select-sm styled-select" style="width: auto; min-width: 100px;">
+                                            <option value="0-asc" selected>A-Z</option>
+                                            <option value="0-desc">Z-A</option>
+                                            <option value="id-asc">ID ↑</option>
+                                            <option value="id-desc">ID ↓</option>
+                                            <option value="2-asc">Libra ↑</option>
+                                            <option value="2-desc">Libra ↓</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -141,8 +157,7 @@
                     <button class="btn btn-primary btn-sm" id="prevBtn" onclick="goToPrev()">
                         <i class="bi bi-chevron-left"></i>
                     </button>
-                    <span id="pageNumbers" class="mx-2"></span>
-                    <span id="pageInfo" class="mx-2">Faqja 1 nga 1</span>
+                    <span id="pageInfo">Faqja 1 nga 1</span>
                     <button class="btn btn-primary btn-sm" id="nextBtn" onclick="goToNext()">
                         <i class="bi bi-chevron-right"></i>
                     </button>
@@ -151,40 +166,53 @@
         </div>
     </div>
 
-    <!--  Modals  -->
+    <!-- Modal  -->
     <div class="modal fade" id="addAuthorModal" tabindex="-1" aria-labelledby="addAuthorModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
-                <div class="modal-header bg-primary text-white">
+                <div class="modal-header text-white">
                     <h5 class="modal-title" id="addAuthorModalLabel">
-                        <i class="bi bi-person-plus-fill"></i> Shto Autor
+                        <i class="bi bi-person-plus-fill"></i> Shto Autor të Ri
                     </h5>
-                    <button type="button"class="btn-close btn-close-white"data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="authorForm">
+                        <!-- Image Upload Section -->
                         <div class="mb-3 text-center">
                             <label for="authorImage" class="form-label">
-                                <i class="bi bi-image-fill"></i> Foto e Autorit
+                                <i class="bi bi-camera-fill"></i> Foto e Autorit
                             </label>
                             <input type="file" class="form-control" id="authorImage" accept="image/*">
-                            <div class="mt-2">
+                            <div class="mt-3">
                                 <img id="previewImage" class="author-img d-none" alt="Preview">
                             </div>
                         </div>
+
+                        <hr class="my-4" style="border-color: #e1e8ed;">
+
+                        <!-- Author Name -->
                         <div class="mb-3">
                             <label for="authorName" class="form-label">
-                            <i class="bi bi-person-fill"></i> Emri i Autorit *
+                                <i class="bi bi-person-fill"></i> Emri i Autorit
                             </label>
-                            <input type="text" class="form-control"     id="authorName" required>
+                            <input type="text" class="form-control" id="authorName" placeholder="Shkruani emrin e autorit..." required>
                         </div>
+
+                        <!-- Author Work -->
                         <div class="mb-3">
-                            <label for="authorWork" class="form-label"> Vepra e tyre *</label>
-                            <input type="text" class="form-control" id="authorWork" required>
+                            <label for="authorWork" class="form-label">
+                                <i class="bi bi-book-fill"></i> Vepra Kryesore
+                            </label>
+                            <input type="text" class="form-control" id="authorWork" placeholder="Vepra më e njohur..." required>
                         </div>
+
+                        <!-- Description -->
                         <div class="mb-3">
-                            <label for="authorDescription" class="form-label"> Pershkrimi *</label>
-                            <textarea class="form-control" id="authorDescription" rows="3" required></textarea>
+                            <label for="authorDescription" class="form-label">
+                                <i class="bi bi-file-text-fill"></i> Përshkrimi
+                            </label>
+                            <textarea class="form-control" id="authorDescription" rows="4" placeholder="Shkruani një përshkrim të shkurtër për autorin..." required></textarea>
                         </div>
                     </form>
                 </div>
@@ -193,7 +221,7 @@
                         <i class="bi bi-x-circle-fill"></i> Anulo
                     </button>
                     <button type="button" class="btn btn-success" id="submitBtn" onclick="saveAuthor()">
-                        <i class="bi bi-check-circle-fill"></i> Ruaj
+                        <i class="bi bi-check-circle-fill"></i> Ruaj Ndryshimet
                     </button>
                 </div>       
             </div>
