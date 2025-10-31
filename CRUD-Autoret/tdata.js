@@ -133,32 +133,8 @@ $(document).ready(function () {
     const value = $(this).val();
     const [column, direction] = value.split("-");
     
-    if (column === "id") {
-      // Sort by ID - extract numeric part from ID field
-      const currentData = table.rows().data().toArray();
-      currentData.sort((a, b) => {
-        // Extract numeric ID from the author HTML (e.g., "#A001" -> 1)
-        const getNumericId = (rowData) => {
-          const match = rowData.author.match(/#A0*(\d+)/);
-          return match ? parseInt(match[1]) : rowData.id;
-        };
-        
-        const idA = getNumericId(a);
-        const idB = getNumericId(b);
-        
-        if (direction === 'asc') {
-          return idA - idB;
-        } else {
-          return idB - idA;
-        }
-      });
-      
-      table.clear();
-      table.rows.add(currentData);
-      table.draw(false);
-    } else {
-      // Sort by regular column
-      const columnIndex = parseInt(column);
+    const columnIndex = parseInt(column);
+    if (!isNaN(columnIndex)) {
       table.order([[columnIndex, direction]]).draw();
     }
   });
