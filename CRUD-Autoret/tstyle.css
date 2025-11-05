@@ -1,18 +1,17 @@
 body {
-        background: #ffffff;
+        background: #F6F3EE; /* main background */
         min-height: 100vh;
         padding: 20px 0;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        color: #f0f0f0;
-        
+        color: #3A3A3A;
 }
 
-.gradient-header{ 
-        background: #5b9dc3;   
+.gradient-header { 
+        background: linear-gradient(135deg, #2F4F4F, #1E4F48);
 }
 
-.main-card{
-        background: #FDFAF6;
+.main-card {
+        background: #FFFFFF;
         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         border-radius: 15px;
         overflow: hidden;
@@ -22,21 +21,20 @@ body {
         font-size: 1.2rem;
 }
 
-.btn-success{
-        --bs-btn-bg: #7bc6d5;
-        --bs-btn-border-color: #7bc6d5;
-        --bs-btn-hover-bg: #3b7c9b;
-        --bs-btn-hover-border-color: #3b7c9b;
-
+.btn-success {
+        --bs-btn-bg: #1E4F48;
+        --bs-btn-border-color: #1E4F48;
+        --bs-btn-hover-bg: #163F3A;
+        --bs-btn-hover-border-color: #163F3A;
 }
 
-.control-card{
-        background: #fff4ec;
-        border: 1px solid #f1e0d3;
+.control-card {
+        background: #F6F2E7;
+        border: 1px solid #E0E0E0;
         border-radius: 10px;
 }
 
-.control-card .card-body{
+.control-card .card-body {
         padding: 15px;
 }
 
@@ -44,19 +42,19 @@ body {
         white-space: nowrap;
 }
 
-.control-card label{
+.control-card label {
         font-size: 0.9rem;
-        color: #444;
+        color: #2F4F4F;
         margin: 0;
 }
 
 /* Styled Select Dropdowns */
 .control-card .styled-select {
-        border: 1.5px solid #d1d9e0;
+        border: 1.5px solid #E0E0E0;
         border-radius: 6px;
         font-size: 0.875rem;
-        color: #2c3e50;
-        background-color: #fff;
+        color: #3A3A3A;
+        background-color: #FFFFFF;
         padding: 0.4rem 2rem 0.4rem 0.75rem;
         font-weight: 500;
         cursor: pointer;
@@ -64,45 +62,45 @@ body {
 }
 
 .control-card .styled-select:hover {
-        border-color: #9ac7c5;
-        background-color: #f8fafb;
+        border-color: #1E4F48;
+        background-color: #F9F5EB;
 }
 
 .control-card .styled-select:focus {
-        border-color: #54a2b3;
-        box-shadow: 0 0 0 0.15rem rgba(84, 162, 179, 0.2);
+        border-color: #1E4F48;
+        box-shadow: 0 0 0 0.15rem rgba(30, 79, 72, 0.2);
         outline: 0;
-        background-color: #fff;
+        background-color: #FFFFFF;
 }
 
 .control-card .styled-select option {
         padding: 10px;
-        background-color: #fff;
-        color: #2c3e50;
+        background-color: #FFFFFF;
+        color: #6C757D;
 }
 
 /* Better spacing for select groups */
 .control-card .d-flex.align-items-center.gap-2 {
         padding: 6px 12px;
-        background: #ffffff;
+        background: #FFFFFF;
         border-radius: 6px;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 /* Regular form-select (fallback) */
 .control-card .form-select {
-        border: 1px solid #dee2e6;
+        border: 1px solid #DEE2E6;
         border-radius: 0.375rem;
         font-size: 0.875rem;
-        color: #495057;
-        background-color: #fff;
+        color: #3A3A3A;
+        background-color: #FFFFFF;
         transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
         padding: 0.375rem 2rem 0.375rem 0.75rem;
 }
 
 .control-card .form-select:focus {
-        border-color: #9ac7c5;
-        box-shadow: 0 0 0 0.2rem rgba(154, 199, 197, 0.25);
+        border-color: #1E4F48;
+        box-shadow: 0 0 0 0.2rem rgba(30, 79, 72, 0.25);
         outline: 0;
 }
 
@@ -114,74 +112,39 @@ body {
 
 /* Style select for better UX */
 #sortSelect option, #entriesSelect option {
-        background-color: #fff;
-        color: #495057;
+        background-color: #FFFFFF;
+        color: #3A3A3A;
 }
 
 #sortSelect option:hover, #entriesSelect option:hover {
-        background-color: #f8f9fa;
-}
-
-/* Responsive adjustments */
-@media (max-width: 991px) {
-        .control-card .col-lg-6:last-child .d-flex {
-                justify-content: flex-start !important;
-        }
-}
-
-@media (max-width: 576px) {
-        .control-card .card-body {
-                padding: 12px;
-        }
-        
-        .control-card .btn-success {
-                width: 100%;
-                margin-bottom: 8px;
-        }
-        
-        .control-card .col-12 .d-flex {
-                flex-direction: column;
-                align-items: stretch !important;
-                width: 100%;
-        }
-        
-        .control-card .d-flex.align-items-center.gap-2 {
-                justify-content: center;
-                margin-top: 8px;
-                width: 100%;
-        }
-        
-        .control-card select {
-                flex: 1;
-        }
+        background-color: #F9F5EB;
 }
 
 /* Input Group Styling */
-.input-group-text{
+.input-group-text {
        border-right: none;
-       background-color: #fff;
+       background-color: #FFFFFF;
 }
 
-.control-card .form-control{
+.control-card .form-control {
         border-left: none;
         box-shadow: none !important;
 }
 
-.control-card .form-control:focus{
-        border-color: #9ac7c5;
-        box-shadow: 0 0 5px rgba(122, 199, 201, 0.25) !important;
+.control-card .form-control:focus {
+        border-color: #1E4F48;
+        box-shadow: 0 0 5px rgba(30, 79, 72, 0.25) !important;
 }
 
- 
 .pagination-controls {
-        background: #f8f9fa;
+        background: #FFFFFF;
         padding: 15px;
         border-radius: 8px;
         margin-bottom: 20px;
 }
 
 .dataTables_length,
-.dataTables_filter{
+.dataTables_filter {
         display: none !important;
 }
 
@@ -190,22 +153,38 @@ body {
         display: none !important;
 }
 
-
-
+/* Table Header */
 #authorsTable thead.table-dark th {
-    background-color: #42aeb8 !important;
-        border-color: #42aeb8 !important;
-    color: #ffffff; ;            
+    background-color: #2F4F4F !important;
+    border-color: #2F4F4F !important;
+    color: #FFFFFF !important;
 }
 
-.table{
-        --bs-table-bg: #fff4ec;
-        --bs-table-border-color: #f1e0d3;
+.table {
+        --bs-table-bg: #F6F2E7;
+        --bs-table-border-color: #F6F2E7;
         --bs-table-border-radius: 0.375rem;
-        --bs-table-striped-bg: #f9e8dd;
+        --bs-table-striped-bg: #F9F5EB;
         --bs-table-striped-color: #000000;
-        --bs-table-hover-bg: #f1e0d3;
+        --bs-table-hover-bg: #F9F5EB;
         --bs-table-hover-color: #000000;
+}
+
+/* Table Columns */
+
+#authorsTable td:first-child strong {
+    display: block;       /* ensures name is on its own line */
+    font-weight: 600;
+    color: #2F4F4F;
+    font-size: 1rem;
+}
+
+#authorsTable td:first-child small {
+    display: block;       /* places ID below the name */
+    margin-top: 2px;
+    font-size: 0.85rem;
+    color: #6C757D;
+    line-height: 1.2;
 }
 
 #authorsTable th:nth-child(1),
@@ -252,61 +231,43 @@ body {
     vertical-align: middle;
 }
 
-
-/* Add space between Edit and Delete buttons */
-#authorsTable .btn{
-        
-        margin: 5px;/* Space below buttons for small screens */
+/* Buttons inside table */
+#authorsTable .btn {
+        margin: 5px;
 }
 
 .btn-warning, .btn-danger {
-        --bs-btn-bg: #9dd6b2;
-        --bs-btn-border-color: #9dd6b2;
-        --bs-btn-hover-bg: #7cc4a2;
-        --bs-btn-hover-border-color: #7cc4a2;
-
+        --bs-btn-bg: #3b6b64;
+        --bs-btn-border-color: #3b6b64;
+        --bs-btn-hover-bg: #1E4F48;
+        --bs-btn-hover-border-color: #1E4F48;
 }
 
-
-.btn-primary{
-
-        --bs-btn-color: #fff;
-  --bs-btn-bg: #1b4f54;
-  --bs-btn-border-color: #1b4f54;
-  --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: #2e7a83;
-  --bs-btn-hover-border-color: #2e7a83;
-  --bs-btn-focus-shadow-rgb: 49,132,253;
-  --bs-btn-active-color: #fff;
-  --bs-btn-active-bg: #1b4f54;
-  --bs-btn-active-border-color: #1b4f54;
-  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  --bs-btn-disabled-color: #fff;
-  --bs-btn-disabled-bg: #1b4f54;
-  --bs-btn-disabled-border-color: #1b4f54;
-
+.btn-primary {
+        --bs-btn-color: #FFFFFF;
+        --bs-btn-bg: #1E4F48;
+        --bs-btn-border-color: #1E4F48;
+        --bs-btn-hover-color: #FFFFFF;
+        --bs-btn-hover-bg: #163F3A;
+        --bs-btn-hover-border-color: #163F3A;
+        --bs-btn-active-bg: #1E4F48;
+        --bs-btn-disabled-bg: #1E4F48;
 }
 
+/* Prev/Next Buttons */
 #prevBtn, #nextBtn {
-        --bs-btn-color: #fff;
-  --bs-btn-bg: #54a2b3;
-  --bs-btn-border-color: #54a2b3;
-  --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: #0b7285;
-  --bs-btn-hover-border-color: #0b7285;
-  --bs-btn-focus-shadow-rgb: 49,132,253;
-  --bs-btn-active-color: #fff;
-  --bs-btn-active-bg: #54a2b3;
-  --bs-btn-active-border-color: #54a2b3;
-  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  --bs-btn-disabled-color: #fff;
-  --bs-btn-disabled-bg: #54a2b3;
-  --bs-btn-disabled-border-color: #54a2b3;
+        --bs-btn-color: #FFFFFF;
+        --bs-btn-bg: #1E4F48;
+        --bs-btn-border-color: #1E4F48;
+        --bs-btn-hover-color: #FFFFFF;
+        --bs-btn-hover-bg: #163F3A;
+        --bs-btn-hover-border-color: #163F3A;
 }
 
+/* Modal */
 .modal-header {
     border-bottom: none;
-    background: linear-gradient(135deg, #54a2b3 0%, #42aeb8 100%);
+    background: linear-gradient(135deg, #2F4F4F, #1E4F48);
     padding: 1.5rem;
 }
 
@@ -323,88 +284,19 @@ body {
 
 .modal-body {
     padding: 2rem;
-    background: #ffffff;
+    background: #FFFFFF;
 }
 
 .modal-footer {
-    border-top: 1px solid #e9ecef;
+    border-top: 1px solid #E0E0E0;
     padding: 1.25rem 2rem;
-    background: #f8f9fa;
+    background: #F9F5EB;
     border-radius: 0 0 15px 15px;
 }
 
-/* Form Labels */
-.modal-body .form-label {
-    color: #2c3e50;
-    font-weight: 600;
-    font-size: 0.95rem;
-    margin-bottom: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.modal-body .form-label i {
-    color: #54a2b3;
-    font-size: 1.1rem;
-}
-
-/* Form Controls */
-.modal-body .form-control,
-.modal-body .form-select {
-    border: 2px solid #e1e8ed;
-    border-radius: 8px;
-    padding: 0.75rem 1rem;
-    font-size: 0.95rem;
-    color: #2c3e50;
-    background-color: #ffffff;
-    transition: all 0.3s ease;
-}
-
-.modal-body .form-control:focus,
-.modal-body .form-select:focus {
-    border-color: #54a2b3;
-    box-shadow: 0 0 0 0.2rem rgba(84, 162, 179, 0.15);
-    background-color: #ffffff;
-}
-
-.modal-body .form-control::placeholder {
-    color: #95a5a6;
-}
-
-/* Textarea specific */
-.modal-body textarea.form-control {
-    resize: vertical;
-    min-height: 100px;
-}
-
-/* Image Preview Section */
-.modal-body .mb-3.text-center {
-    padding: 1rem;
-    background: #f8f9fa;
-    border-radius: 10px;
-    border: 2px dashed #d1d9e0;
-    transition: all 0.3s ease;
-}
-
-.modal-body .mb-3.text-center:hover {
-    border-color: #54a2b3;
-    background: #f0f7f9;
-}
-
-#previewImage {
-    margin-top: 1rem;
-    border: 3px solid #54a2b3;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* File Input Styling */
-.modal-body input[type="file"] {
-    cursor: pointer;
-}
-
+/* File Input */
 .modal-body input[type="file"]::file-selector-button {
-    background: linear-gradient(135deg, #54a2b3 0%, #42aeb8 100%);
+    background: linear-gradient(135deg, #1E4F48, #2F4F4F);
     color: white;
     border: none;
     padding: 0.5rem 1rem;
@@ -415,114 +307,10 @@ body {
 }
 
 .modal-body input[type="file"]::file-selector-button:hover {
-    background: linear-gradient(135deg, #42aeb8 0%, #3b9aa6 100%);
-    transform: translateY(-1px);
+    background: linear-gradient(135deg, #163F3A, #1E4F48);
 }
 
-/* Modal Buttons */
-.modal-footer .btn {
-    padding: 0.65rem 1.5rem;
-    font-weight: 600;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.modal-footer .btn-secondary {
-    background: #6c757d;
-    border: none;
-}
-
-.modal-footer .btn-secondary:hover {
-    background: #5a6268;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
-}
-
-.modal-footer .btn-success {
-    background: linear-gradient(135deg, #7bc6d5 0%, #54a2b3 100%);
-    border: none;
-}
-
-.modal-footer .btn-success:hover {
-    background: linear-gradient(135deg, #54a2b3 0%, #3b9aa6 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(84, 162, 179, 0.4);
-}
-
-/* Close Button */
-.btn-close-white {
-    filter: brightness(0) invert(1);
-    opacity: 0.9;
-}
-
-.btn-close-white:hover {
-    opacity: 1;
-}
-
-/* Required Field Indicator */
-.modal-body .form-label:has(+ input[required])::after,
-.modal-body .form-label:has(+ textarea[required])::after {
-    content: "";
-    color: #e74c3c;
-    margin-left: 0.25rem;
-}
-
-/* Form Group Spacing */
-.modal-body .mb-3 {
-    margin-bottom: 1.5rem;
-}
-
-/* Input Icons */
-.modal-body .form-label i {
-    width: 20px;
-    text-align: center;
-}
-
-/* Validation Styles */
-.modal-body .form-control.is-invalid {
-    border-color: #e74c3c;
-}
-
-.modal-body .form-control.is-valid {
-    border-color: #2ecc71;
-}
-
-/* Animation */
-.modal.fade .modal-dialog {
-    transition: transform 0.3s ease-out;
-}
-
-.modal.show .modal-dialog {
-    transform: scale(1);
-}
-
-/* Responsive Modal */
-@media (max-width: 576px) {
-    .modal-body {
-        padding: 1.5rem;
-    }
-    
-    .modal-footer {
-        padding: 1rem 1.5rem;
-    }
-    
-    .modal-footer .btn {
-        padding: 0.5rem 1rem;
-        font-size: 0.9rem;
-    }
-}
-
-.card-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;              
-    position: relative;
-}
-
-/* Custom Pagination Wrapper */
+/* Pagination Wrapper */
 .custom-pagination-wrapper {
   display: flex;
   align-items: center;
@@ -532,121 +320,38 @@ body {
   margin-top: 20px;
   padding: 15px 20px;
   border-radius: 8px;
-  background: #f8f9fa;
+  background: #ffffff; /* same as main card body */
   gap: 15px;
 }
 
-/* Info Display on the left */
 #infoDisplay {
   font-size: 0.9rem;
-  color: #444;
+  color: #3A3A3A;
   font-weight: 500;
   margin: 0;
-  white-space: nowrap;
-}
-
-/* Custom Pagination Controls on the right */
-.custom-pagination {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
   white-space: nowrap;
 }
 
 #pageInfo {
   margin: 0 8px;
   font-size: 0.9rem;
-  color: #444;
+  color: #3A3A3A;
   font-weight: 500;
   min-width: 90px;
   text-align: center;
 }
 
-.custom-pagination button {
-  min-width: 38px;
-  height: 38px;
-  padding: 0;
-  font-weight: 500;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-}
-
-.custom-pagination .btn-primary i {
-    font-size: 1rem;
-}
-
-.custom-pagination .btn:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-.custom-pagination .btn:disabled,
-.custom-pagination .btn.disabled {
-  background-color: #bcdde3 !important;
-  border-color: #bcdde3 !important;
-  color: #ffffff !important;
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.custom-pagination .btn:disabled i,
-.custom-pagination .btn.disabled i {
-  opacity: 0.7;
-}
-
+/* Author image */
 .author-img {
   width: 60px;
   height: 60px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #bad7ff;
+  border: 2px solid #E0E0E0;
   flex-shrink: 0;
 }
 
-#authorsTable td,
-#authorsTable th {
-  vertical-align: middle;
-}
-
-#authorsTable td:first-child {
-  text-align: left;
-  white-space: nowrap;
-}
-#authorsTable td:first-child .d-flex {
-  align-items: left;
-  gap: 12px;
-}
-
-/* Make sure author name text doesn't wrap weirdly */
-#authorsTable td:first-child div {
-  white-space: normal;
-  line-height: 1.3;
-}
-
-/* Tweak the author name block */
-#authorsTable td:first-child strong {
-  color: #222;
-  font-weight: 600;
-  font-size: 1rem;
-}
-
-#authorsTable td:first-child small {
-  color: #777;
-  font-size: 0.85rem;
-    display: block; /* ensures ID appears below name */
-  margin-top: 2px;
-}
-
-/* Prevent cell squeeze on smaller screens */
-#authorsTable td:first-child {
-  min-width: 200px;
-}
-
-/* Improve responsiveness for smaller devices */
+/* Responsive fix for table buttons & pagination */
 @media (max-width: 768px) {
   #authorsTable td:first-child .d-flex {
     flex-direction: column;
@@ -689,7 +394,6 @@ body {
     font-size: 0.85rem;
     min-width: 80px;
   }
-
 }
 
 #authorsTable thead th {
@@ -701,7 +405,6 @@ body {
   padding: 12px 15px !important;
 }
 
-/* Add visual separation between header columns */
 #authorsTable thead th:not(:last-child) {
-  border-right: 2px solid #5b9dc3 !important;
+  border-right: 2px solid #1E4F48 !important;
 }
